@@ -49,17 +49,9 @@ infile=$1
 outfile=$2
 language=$3
 
-# default to laser2
-model_file=${model_dir}/laser2.pt
-spm=${model_dir}/laser2.spm
+encoder="${model_dir}/bilstm.93langs.2018-12-26.pt"
+bpe_codes="${model_dir}/93langs.fcodes"
 
-#if [ ! -z ${language} ]; then
-#    model_file=${model_dir}/laser3-$language.v$version.pt
-#    lang_specific_spm=${model_dir}/laser3-$language.v$version.spm
-#    if [[ -s $lang_specific_spm ]]; then
-#        spm=$lang_specific_spm
-#    fi
-#fi
 
 if [[ ! -s $model_file ]]; then
     echo "couldn't find model file: $model_file"
@@ -71,9 +63,10 @@ if [[ ! -s $spm ]]; then
     exit 1
 fi
 
-python3 ${LASER}/source/embed.py \
-    --input     ${infile}        \
-    --encoder   ${model_file}    \
-    --spm-model $spm             \
-    --output    ${outfile}       \
+cat $ifile \
+  | python3 ${LASER}/source/embed.py \
+    --encoder ${encoder} \
+    --token-lang ${lang} \
+    --bpe-codes ${bpe_codes} \
+    --output ${ofile} \
     --verbose
