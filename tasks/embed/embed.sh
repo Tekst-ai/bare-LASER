@@ -52,17 +52,6 @@ language=$3
 encoder="${model_dir}/bilstm.93langs.2018-12-26.pt"
 bpe_codes="${model_dir}/93langs.fcodes"
 
-
-if [[ ! -s $model_file ]]; then
-    echo "couldn't find model file: $model_file"
-    exit 1
-fi
-
-if [[ ! -s $spm ]]; then
-    echo "couldn't find spm: $spm"
-    exit 1
-fi
-
 cat $ifile \
   | python3 ${LASER}/source/embed.py \
     --encoder ${encoder} \
