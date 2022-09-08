@@ -48,14 +48,14 @@ fi
 infile=$1
 outfile=$2
 language=$3
-
+echo 
 encoder="${model_dir}/bilstm.93langs.2018-12-26.pt"
 bpe_codes="${model_dir}/93langs.fcodes"
 
-cat $ifile \
+cat $infile \
   | python3 ${LASER}/source/embed.py \
     --encoder ${encoder} \
-    --token-lang ${lang} \
+    --token-lang ${language} \
     --bpe-codes ${bpe_codes} \
-    --output ${ofile} \
+    --output ${outfile} \
     --verbose
