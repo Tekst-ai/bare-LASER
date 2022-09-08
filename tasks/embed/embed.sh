@@ -53,13 +53,13 @@ language=$3
 model_file=${model_dir}/laser2.pt
 spm=${model_dir}/laser2.spm
 
-if [ ! -z ${language} ]; then
-    model_file=${model_dir}/laser3-$language.v$version.pt
-    lang_specific_spm=${model_dir}/laser3-$language.v$version.spm
-    if [[ -s $lang_specific_spm ]]; then
-        spm=$lang_specific_spm
-    fi
-fi
+#if [ ! -z ${language} ]; then
+#    model_file=${model_dir}/laser3-$language.v$version.pt
+#    lang_specific_spm=${model_dir}/laser3-$language.v$version.spm
+#    if [[ -s $lang_specific_spm ]]; then
+#        spm=$lang_specific_spm
+#    fi
+#fi
 
 if [[ ! -s $model_file ]]; then
     echo "couldn't find model file: $model_file"
